@@ -1,0 +1,8 @@
+utility_meter:
+  server_energy_daily:
+    source: sensor.shellyplugsg3_b08184a4dae0_total_energy
+    cycle: daily
+
+  server_energy_monthly:
+    source: sensor.shellyplugsg3_b08184a4dae0_total_energy
+    cycle: monthly
