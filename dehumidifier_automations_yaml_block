@@ -60,3 +60,27 @@
     data_template:
       entity_id: input_select.dehumidifier_modes
       option: '{{ states.humidifier.midea_dehumidifier_18691697733031.attributes.mode }}'
+###
+- alias: Input boolean Ionizer change
+  trigger:
+    platform: state
+    entity_id: input_boolean.dehumidifier_ionizer
+  action:
+    service: midea_dehumidifier.set_ion_state
+    data:
+      entity_id: humidifier.midea_dehumidifier_18691697733031
+      ion_state: "{{ 1 if is_state('input_boolean.dehumidifier_ionizer', 'on') else 0 }}"
+###
+- alias: MideaDehumidifier Ion state changed
+  trigger:
+    platform: state
+    entity_id: humidifier.midea_dehumidifier_18691697733031
+  action:
+    service: >
+      {% if state_attr('humidifier.midea_dehumidifier_18691697733031', 'ion') == 1 %}
+      input_boolean.turn_on
+      {% else %}
+      input_boolean.turn_off
+      {% endif %}
+    data:
+      entity_id: input_boolean.dehumidifier_ionizer
