@@ -26,3 +26,7 @@ sensor:
         friendly_name: "midea_target_humidity"
         value_template: "{{ state_attr('humidifier.midea_dehumidifier_18691697733031', 'humidity') }}"
         unit_of_measurement: "%"
+input_boolean:
+  dehumidifier_ionizer:
+    name: "Ionizer"
+    icon: mdi:weather-windy
